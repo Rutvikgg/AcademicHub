@@ -4,7 +4,7 @@ Welcome to **AcademicHub**—a cutting-edge web application designed to revoluti
 
 We are also developing **AcademicHub** as a Software-as-a-Service (SaaS) product for institutions and organizations, offering scalable solutions tailored to meet diverse educational and administrative needs.
 
-## 🚀 Key Features
+## 🚀 Key Features 
 
 ### 🔒 **No Copyright Content Compliance**
 Ensure academic integrity with our robust system that prevents the use of copyrighted content in assignments and practicals. Maintain a fair and transparent academic process effortlessly.
