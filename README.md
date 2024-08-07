@@ -5,7 +5,7 @@ It will help Admins, Mangement & Faculty members to keep track of student Academ
 
 ## Team
 
-Kamal Agrahari - UI/UX Designer [https://github.com/kamalagrahari03]
-Akash Nahak - Frontend Developer [https://github.com/ak2484]
-Sahil Deshmukh - Documentation & Data Aggregrater [https://github.com/sahil5343]
-Rutvik Gondekar - Backend Developer [https://github.com/Rutvikgg]
+[Kamal Agrahari](https://github.com/kamalagrahari03) - UI/UX Designer 
+[Akash Nahak](https://github.com/ak2484) - Frontend Developer 
+[Sahil Deshmukh](https://github.com/sahil5343) - Documentation & Data Aggregrater 
+[Rutvik Gondekar](https://github.com/Rutvikgg) - Backend Developer 
