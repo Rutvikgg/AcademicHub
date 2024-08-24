@@ -3,6 +3,7 @@
 
 ### dotenv ###
 .env
+/config.env
 
 ### Flutter ###
 # Flutter/Dart/Pub related

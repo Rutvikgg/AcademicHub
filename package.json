@@ -2,9 +2,11 @@
   "name": "academichub",
   "version": "1.0.0",
   "description": "A Student Academic Management App for Institutes",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./backend/server.js",
+    "start:prod": "SET NODE_ENV=production&&nodemon ./backend/server.js",
+    "debug": "ndb ./backend/server.js"
   },
   "author": "Rutvik-Akash-Kamal-Sahil",
   "license": "ISC",
