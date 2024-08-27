@@ -33,12 +33,12 @@ const courseSchema = new mongoose.Schema(
     ],
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -51,7 +51,12 @@ const courseSchema = new mongoose.Schema(
 courseSchema.pre('save', function (next) {
   if (this.isnew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+courseSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 

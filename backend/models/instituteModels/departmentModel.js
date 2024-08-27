@@ -34,12 +34,12 @@ const departmentSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -52,7 +52,12 @@ const departmentSchema = new mongoose.Schema(
 departmentSchema.pre('save', function (next) {
   if (this.isNew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+departmentSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 

@@ -20,16 +20,24 @@ const nonTeachingStaffSchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Institute',
     },
-    department: {},
-    otherDepartments: {},
+    department: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Department',
+    },
+    otherDepartments: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Department',
+      },
+    ],
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -42,7 +50,12 @@ const nonTeachingStaffSchema = new mongoose.Schema(
 nonTeachingStaffSchema.pre('save', function (next) {
   if (this.isNew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+nonTeachingStaffSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 

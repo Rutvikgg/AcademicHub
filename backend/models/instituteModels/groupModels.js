@@ -40,12 +40,12 @@ const groupSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -58,7 +58,12 @@ const groupSchema = new mongoose.Schema(
 groupSchema.pre('save', function (next) {
   if (this.isNew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+groupSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 const Group = mongoose.model('Group', groupSchema);

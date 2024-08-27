@@ -28,12 +28,12 @@ const examSchema = new mongoose.Schema(
     duration: Number,
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -46,7 +46,12 @@ const examSchema = new mongoose.Schema(
 examSchema.pre('save', function (next) {
   if (this.isNew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+examSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 

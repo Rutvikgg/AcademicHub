@@ -27,23 +27,42 @@ const studentSchema = new mongoose.Schema(
       max: 12,
       default: 1,
     },
-    division: {},
-    batch: {},
+    division: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Group',
+    },
+    batch: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Group',
+    },
     institute: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Institute',
     },
-    department: {},
-    otherDepartments: {},
-    courses: {},
+    department: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Department',
+    },
+    otherDepartments: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Department',
+      },
+    ],
+    courses: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Course',
+      },
+    ],
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -56,7 +75,12 @@ const studentSchema = new mongoose.Schema(
 studentSchema.pre('save', function (next) {
   if (this.isNew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+studentSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 

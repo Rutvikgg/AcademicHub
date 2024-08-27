@@ -37,12 +37,12 @@ const labSchema = new mongoose.Schema(
     ],
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -53,9 +53,14 @@ const labSchema = new mongoose.Schema(
 );
 
 labSchema.pre('save', function (next) {
-  if (this.isnew) return next();
+  if (this.isNew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+labSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 

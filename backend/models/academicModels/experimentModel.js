@@ -9,7 +9,7 @@ const experimentSchema = new mongoose.Schema(
     instruction: String,
     dateOfPerformance: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
     },
     dateOfSubmission: {
       type: Date,
@@ -25,12 +25,12 @@ const experimentSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -41,9 +41,14 @@ const experimentSchema = new mongoose.Schema(
 );
 
 experimentSchema.pre('save', function (next) {
-  if (this.isnew) return next();
+  if (this.isNew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
+  next();
+});
+
+experimentSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
   next();
 });
 

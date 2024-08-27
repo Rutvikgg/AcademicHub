@@ -9,7 +9,7 @@ const assignmentSchema = new mongoose.Schema(
     instruction: String,
     dateOfPerformance: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
     },
     dateOfSubmission: {
       type: Date,
@@ -31,12 +31,12 @@ const assignmentSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
     updatedAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
       select: false,
     },
   },
@@ -49,10 +49,14 @@ const assignmentSchema = new mongoose.Schema(
 assignmentSchema.pre('save', function (next) {
   if (this.isnew) return next();
 
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
   next();
 });
 
+assignmentSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: new Date() });
+  next();
+});
 const Assignment = mongoose.model('Assignment', assignmentSchema);
 
 module.exports = Assignment;
