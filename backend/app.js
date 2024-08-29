@@ -9,6 +9,8 @@ const hpp = require('hpp');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+const userRouter = require('./routes/userRoutes');
+
 const app = express();
 
 // 1. Global Middleware
@@ -45,6 +47,7 @@ app.use(hpp());
 // app.use(express.static(`${__dirname}/public`));
 
 // 2. Routes
+app.use('/api/v1/users', userRouter);
 
 // 3. Global error handlers
 

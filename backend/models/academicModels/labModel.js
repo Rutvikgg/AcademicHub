@@ -26,13 +26,13 @@ const labSchema = new mongoose.Schema(
     teachersIncharge: [
       {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'TeachingStaff',
+        ref: 'User',
       },
     ],
     labAssistants: [
       {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'NonTeachingStaff',
+        ref: 'User',
       },
     ],
     createdAt: {

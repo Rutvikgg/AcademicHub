@@ -66,6 +66,7 @@ groupSchema.pre('findOneAndUpdate', function (next) {
   this.set({ updatedAt: new Date() });
   next();
 });
+
 const Group = mongoose.model('Group', groupSchema);
 
 module.exports = Group;

@@ -8,7 +8,7 @@ const examScoreSchema = new mongoose.Schema(
     },
     student: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Student',
+      ref: 'User',
     },
     marks: {
       type: Number,

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const User = require('./userModel');
 
-const adminSchema = new mongoose.Schema(
+const systemAdminSchema = new mongoose.Schema(
   {
     adminId: {
       type: String,
-      required: [true, 'Please provide admin id'],
+      required: [true, 'Please provide system admin id'],
       unique: true,
     },
 
@@ -22,6 +22,6 @@ const adminSchema = new mongoose.Schema(
   },
 );
 
-const Admin = User.discriminator('Admin', adminSchema);
+const SystemAdmin = User.discriminator('SystemAdmin', systemAdminSchema);
 
-module.exports = Admin;
+module.exports = SystemAdmin;

@@ -28,7 +28,7 @@ const timeTableSchema = new mongoose.Schema(
         subject: String,
         teacher: {
           type: mongoose.SchemaTypes.ObjectId,
-          ref: 'TeachingStaff',
+          ref: 'User',
         },
         startTime: String,
         endTime: String,

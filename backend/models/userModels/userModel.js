@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema(
   {
@@ -74,13 +76,14 @@ const userSchema = new mongoose.Schema(
     userType: {
       type: String,
       enum: [
-        'student',
-        'teachingStaff',
-        'nonTeachingStaff',
-        'admin',
-        'productAdmin',
+        'Student',
+        'TeachingStaff',
+        'NonTeachingStaff',
+        'Admin',
+        'SystemAdmin',
+        'ProductAdmin',
       ],
-      default: 'student',
+      default: 'Student',
     },
     profileImage: String,
     userStatus: {
@@ -89,6 +92,20 @@ const userSchema = new mongoose.Schema(
       default: 'active',
       select: false,
     },
+    institute: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Institute',
+    },
+    department: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Department',
+    },
+    otherDepartments: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Department',
+      },
+    ],
     password: {
       type: String,
       required: [true, 'Please provide a password.'],
@@ -106,6 +123,8 @@ const userSchema = new mongoose.Schema(
       },
     },
     passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
     createdAt: {
       type: Date,
       default: Date.now,
@@ -120,8 +139,66 @@ const userSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+    discriminatorKey: 'userType',
   },
 );
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword,
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10,
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  // False means password is NOT changed
+  return false;
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  // console.log(resetToken, this.passwordResetToken);
+
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
+};
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+
+  this.password = await bcrypt.hash(this.password, 12);
+
+  this.passwordConfirm = undefined;
+  next();
+});
+
+// Updates property to reflect password change
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+// Select on active users
+userSchema.pre(/^find/, function (next) {
+  this.find({ userStatus: { $ne: 'inactive' } });
+  next();
+});
 
 userSchema.pre('save', function (next) {
   if (this.isNew) return next();

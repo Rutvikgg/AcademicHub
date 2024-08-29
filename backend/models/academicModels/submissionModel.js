@@ -4,7 +4,7 @@ const submissionSchema = new mongoose.Schema(
   {
     student: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Student',
+      ref: 'User',
     },
     subjectType: {
       type: String,
