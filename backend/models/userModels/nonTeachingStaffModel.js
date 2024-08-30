@@ -3,7 +3,7 @@ const User = require('./userModel');
 
 const nonTeachingStaffSchema = new mongoose.Schema(
   {
-    nonTeachingStaffId: {
+    instituteAllottedId: {
       type: String,
       required: [true, 'Please provide non teaching staff id'],
       unique: true,

@@ -1,6 +1,6 @@
 const express = require('express');
 const adminController = require('../controllers/userControllers/adminController');
-const authController = require('../controllers/userControllers/authController');
+const authController = require('../controllers/authController');
 const studentController = require('../controllers/userControllers/studentController');
 const teachingStaffController = require('../controllers/userControllers/teachingStaffController');
 const nonTeachingStaffController = require('../controllers/userControllers/nonTeachingStaffController');

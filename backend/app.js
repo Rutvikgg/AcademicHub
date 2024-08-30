@@ -10,6 +10,17 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const userRouter = require('./routes/userRoutes');
+const instituteRouter = require('./routes/instituteRoutes/instituteRoutes');
+const departmentRouter = require('./routes/instituteRoutes/departmentRoutes');
+const groupRouter = require('./routes/instituteRoutes/groupRoutes');
+const courseRouter = require('./routes/academicRoutes/courseRoutes');
+const labRouter = require('./routes/academicRoutes/labRoutes');
+const submissionRouter = require('./routes/academicRoutes/submissionRoutes');
+const assignmentRouter = require('./routes/academicRoutes/assignmentRoutes');
+const experimentRouter = require('./routes/academicRoutes/experimentRoutes');
+const examRouter = require('./routes/academicRoutes/examRoutes');
+const examScoreRouter = require('./routes/academicRoutes/examScoreRoutes');
+const resourceRouter = require('./routes/academicRoutes/resourceRoutes');
 
 const app = express();
 
@@ -43,11 +54,22 @@ app.use(xss());
 // Prevent HTTP parameter pollution
 app.use(hpp());
 
-// Serving static files (Currently not required, maybe required in future)
+// Serving static files (Currently not required, maybe in future)
 // app.use(express.static(`${__dirname}/public`));
 
 // 2. Routes
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/institute', instituteRouter);
+app.use('/api/v1/department', departmentRouter);
+app.use('/api/v1/group', groupRouter);
+app.use('/api/v1/course', courseRouter);
+app.use('/api/v1/lab', labRouter);
+app.use('/api/v1/submission', submissionRouter);
+app.use('/api/v1/assignment', assignmentRouter);
+app.use('/api/v1/experiment', experimentRouter);
+app.use('/api/v1/exam', examRouter);
+app.use('/api/v1/examScore', examScoreRouter);
+app.use('/api/v1/resource', resourceRouter);
 
 // 3. Global error handlers
 

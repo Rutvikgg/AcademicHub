@@ -9,8 +9,8 @@ const examSchema = new mongoose.Schema(
     description: String,
     subjectType: {
       type: String,
-      required: [true, 'Please provide type of examination'],
       enum: ['Course', 'Lab'],
+      default: 'Course',
     },
     subject: {
       type: mongoose.SchemaTypes.ObjectId,

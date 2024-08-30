@@ -3,7 +3,7 @@ const User = require('./userModel');
 
 const systemAdminSchema = new mongoose.Schema(
   {
-    adminId: {
+    instituteAllottedId: {
       type: String,
       required: [true, 'Please provide system admin id'],
       unique: true,

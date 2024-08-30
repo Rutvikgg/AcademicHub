@@ -17,8 +17,8 @@ const assignmentSchema = new mongoose.Schema(
     },
     subjectType: {
       type: String,
-      required: true,
       enum: ['Course', 'Lab'],
+      default: 'Lab',
     },
     subject: {
       type: mongoose.SchemaTypes.ObjectId,
