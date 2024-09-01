@@ -47,7 +47,7 @@ const assignmentSchema = new mongoose.Schema(
 );
 
 assignmentSchema.pre('save', function (next) {
-  if (this.isnew) return next();
+  if (this.isNew) return next();
 
   this.updatedAt = new Date();
   next();

@@ -11,6 +11,12 @@ const courseSchema = new mongoose.Schema(
       required: [true, 'Please provide course code.'],
       unique: true,
     },
+    year: {
+      type: Number,
+      required: [true, 'Please provide year of the course.'],
+      min: 1,
+      max: 6,
+    },
     semester: {
       type: Number,
       required: [true, 'Please provide semester of the course.'],
@@ -28,7 +34,7 @@ const courseSchema = new mongoose.Schema(
     teachersIncharge: [
       {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'TeachingStaff',
+        ref: 'User',
       },
     ],
     createdAt: {
@@ -49,7 +55,7 @@ const courseSchema = new mongoose.Schema(
 );
 
 courseSchema.pre('save', function (next) {
-  if (this.isnew) return next();
+  if (this.isNew) return next();
 
   this.updatedAt = new Date();
   next();

@@ -19,10 +19,7 @@ router
 
 router
   .route('/:id')
-  .get(
-    authController.restrictTo('ProductAdmin', 'SystemAdmin'),
-    instituteController.getInstitute,
-  )
+  .get(instituteController.getInstitute)
   .patch(
     authController.restrictTo('ProductAdmin', 'SystemAdmin'),
     instituteController.updateInstitute,

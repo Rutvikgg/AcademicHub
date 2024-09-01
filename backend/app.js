@@ -68,7 +68,7 @@ app.use('/api/v1/submission', submissionRouter);
 app.use('/api/v1/assignment', assignmentRouter);
 app.use('/api/v1/experiment', experimentRouter);
 app.use('/api/v1/exam', examRouter);
-app.use('/api/v1/examScore', examScoreRouter);
+app.use('/api/v1/exam-score', examScoreRouter);
 app.use('/api/v1/resource', resourceRouter);
 
 // 3. Global error handlers

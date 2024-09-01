@@ -15,6 +15,18 @@ const labSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please provide credits alloted to course.'],
     },
+    year: {
+      type: Number,
+      required: [true, 'Please provide year of the course.'],
+      min: 1,
+      max: 6,
+    },
+    semester: {
+      type: Number,
+      required: [true, 'Please provide semester of the course.'],
+      min: 1,
+      max: 12,
+    },
     course: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Course',
