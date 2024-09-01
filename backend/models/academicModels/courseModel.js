@@ -49,7 +49,7 @@ const courseSchema = new mongoose.Schema(
 );
 
 courseSchema.pre('save', function (next) {
-  if (this.isnew) return next();
+  if (this.isNew) return next();
 
   this.updatedAt = new Date();
   next();
