@@ -93,11 +93,11 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
     institute: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'Institute',
     },
     department: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'Department',
     },
     otherDepartments: [

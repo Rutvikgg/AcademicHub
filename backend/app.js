@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
-const userRouter = require('./routes/userRoutes');
+const userRouter = require('./routes/userRoutes/userRoutes');
 const instituteRouter = require('./routes/instituteRoutes/instituteRoutes');
 const departmentRouter = require('./routes/instituteRoutes/departmentRoutes');
 const groupRouter = require('./routes/instituteRoutes/groupRoutes');
@@ -22,6 +22,7 @@ const experimentRouter = require('./routes/academicRoutes/experimentRoutes');
 const examRouter = require('./routes/academicRoutes/examRoutes');
 const examScoreRouter = require('./routes/academicRoutes/examScoreRoutes');
 const resourceRouter = require('./routes/academicRoutes/resourceRoutes');
+const dashboardRouter = require('./routes/userRoutes/dashboardRoutes');
 
 const app = express();
 
@@ -72,6 +73,8 @@ app.use('/api/v1/experiment', experimentRouter);
 app.use('/api/v1/exam', examRouter);
 app.use('/api/v1/exam-score', examScoreRouter);
 app.use('/api/v1/resource', resourceRouter);
+
+app.use('/api/v1/dashboard', dashboardRouter);
 
 // 3. Global error handlers
 
