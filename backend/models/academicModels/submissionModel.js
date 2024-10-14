@@ -16,7 +16,7 @@ const submissionSchema = new mongoose.Schema(
       required: true,
       refPath: 'subjectType',
     },
-    dateOfSubmission: Date,
+    dateOfSubmission: { type: Date },
     status: {
       type: String,
       enum: ['Submitted', 'Not Submitted', 'Graded', 'Late'],

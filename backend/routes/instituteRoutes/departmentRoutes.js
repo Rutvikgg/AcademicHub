@@ -8,10 +8,7 @@ router.use(authController.protect);
 
 router
   .route('/')
-  .get(
-    authController.restrictTo('SystemAdmin', 'Admin'),
-    departmentController.getAllDepartments,
-  )
+  .get(departmentController.getAllDepartments)
   .post(
     authController.restrictTo('SystemAdmin'),
     departmentController.createDepartment,
@@ -19,10 +16,7 @@ router
 
 router
   .route('/:id')
-  .get(
-    authController.restrictTo('SystemAdmin', 'Admin'),
-    departmentController.getDepartment,
-  )
+  .get(departmentController.getDepartment)
   .patch(
     authController.restrictTo('SystemAdmin', 'Admin'),
     departmentController.updateDepartment,

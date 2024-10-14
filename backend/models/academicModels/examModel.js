@@ -17,6 +17,18 @@ const examSchema = new mongoose.Schema(
       required: true,
       refPath: 'subjectType',
     },
+    year: {
+      type: Number,
+      required: [true, 'Please provide year of the course.'],
+      min: 1,
+      max: 6,
+    },
+    semester: {
+      type: Number,
+      required: [true, 'Please provide semester of the course.'],
+      min: 1,
+      max: 12,
+    },
     examDate: {
       type: Date,
       required: [true, 'Please provide date of examination'],
@@ -25,7 +37,8 @@ const examSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please provide the total marks for examination'],
     },
-    duration: Number,
+    startTime: Date,
+    endTime: Date,
     createdAt: {
       type: Date,
       default: Date.now,

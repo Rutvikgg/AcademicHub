@@ -1,13 +1,14 @@
 const express = require('express');
-const adminController = require('../controllers/userControllers/adminController');
-const authController = require('../controllers/authController');
-const studentController = require('../controllers/userControllers/studentController');
-const teachingStaffController = require('../controllers/userControllers/teachingStaffController');
-const nonTeachingStaffController = require('../controllers/userControllers/nonTeachingStaffController');
+const adminController = require('../../controllers/userControllers/adminController');
+const authController = require('../../controllers/authController');
+const studentController = require('../../controllers/userControllers/studentController');
+const teachingStaffController = require('../../controllers/userControllers/teachingStaffController');
+const nonTeachingStaffController = require('../../controllers/userControllers/nonTeachingStaffController');
 
 const router = express.Router();
 
 router.route('/login').post(authController.login);
+router.route('/logout').get(authController.logout);
 router.route('/forget-password').post(authController.forgetPassword);
 router.route('/reset-password/:token').post(authController.resetPassword);
 router

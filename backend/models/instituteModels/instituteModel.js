@@ -6,6 +6,9 @@ const instituteSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a name for institute'],
   },
+  nameAcronym: {
+    type: String,
+  },
   instituteCode: {
     type: String,
     required: [true, 'Please provide institute code'],
