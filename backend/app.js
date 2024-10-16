@@ -38,7 +38,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // CORS
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:5173', // Replace with the front-end origin
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Limits request from same IP
 const limiter = rateLimit({
