@@ -19,7 +19,6 @@ const createSendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
     sameSite: 'None',
-    path: '/',
   };
 
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
@@ -94,7 +93,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   } else if (req.cookies.jwt) {
     token = req.cookies.jwt;
-    console.log(token);
   }
 
   if (!token) {
